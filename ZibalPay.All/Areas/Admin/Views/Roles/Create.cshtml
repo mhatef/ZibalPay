@@ -1,0 +1,25 @@
+﻿@model ZibalPay.Data.Entities.Users.Role
+
+@{
+    ViewData["Title"] = "Create";
+    Layout =null;
+}
+
+<div class="row">
+    <div class="col">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="RoleTitle" class="control-label"></label>
+                <input asp-for="RoleTitle" class="form-control" />
+                <span asp-validation-for="RoleTitle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="ثبت" class="btn btn-success btn-block" />
+            </div>
+        </form>
+    </div>
+</div>
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+

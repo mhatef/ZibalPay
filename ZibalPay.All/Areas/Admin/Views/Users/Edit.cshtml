@@ -1,0 +1,144 @@
+﻿@using ZibalPay.Data.Entities.Users
+@model ZibalPay.Core.DTOs.User.EditUserVM
+
+@{
+    ViewData["Title"] = "ویرایش کاربر";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+
+    List<Role> roles = ViewData["Roles"] as List<Role>;
+    List<int> selectedRoles = ViewData["SelectedRoles"] as List<int>;
+}
+
+<h1>ویرایش کاربر</h1>
+<div class="row">
+    <div class="col">
+        <p>
+            <a class="btn btn-info float-right m-2" asp-action="Index" asp-route-id="false">بازگشت</a>
+            <button class="btn btn-warning float-right m-2" onclick="ChangePassword(@Model.UserId)">تغیر رمز عبور</button>
+        </p>
+    </div>
+</div>
+<hr />
+<div class="row ">
+    <form asp-action="Edit" class="w-100 m-4">
+        <input type="hidden" asp-for="UserId" />
+
+        <div class="row">
+
+            <div class="col-md-9">
+                <div class="card border">
+                    <div class="card-header bg-dark text-white">مشخصات کاربر</div>
+                    <div class="card-body">
+                        <div class="">
+
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="UserFirstName" class="control-label"></label>
+                                        <input asp-for="UserFirstName" class="form-control" />
+                                        <span asp-validation-for="UserFirstName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="UserLastName" class="control-label"></label>
+                                        <input asp-for="UserLastName" class="form-control" />
+                                        <span asp-validation-for="UserLastName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="" for="UserGender">جنسیت</label>
+                                        <select asp-for="UserGender" class="custom-select">
+                                            <option value="true">خانم</option>
+                                            <option value="false">آقا</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="UserPhoneNumber" class="control-label"></label>
+                                        <input asp-for="UserPhoneNumber" class="form-control" />
+                                        <span asp-validation-for="UserPhoneNumber" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="UserEmail" class="control-label"></label>
+                                        <input asp-for="UserEmail" class="form-control" />
+                                        <span asp-validation-for="UserEmail" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card border">
+                    <div class="card-header bg-dark text-white">نقش کاربر</div>
+                    <div class="card-body">
+                        @foreach (var role in roles)
+                        {
+                            <div class="form-check">
+                                <input @((selectedRoles.Any(s => s == role.RoleId)) ? "checked" : "") class="form-check-input" type="checkbox" name="selectedRole" id="selectedRole" value="@role.RoleId">
+                                <label class="form-check-label mx-3" for="selectedRole">@role.RoleTitle</label>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="form-group">
+            <input type="submit" value="ثبت" class="btn btn-warning btn-block" />
+        </div>
+    </form>
+</div>
+
+@section Modal
+{
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="modal_body">
+                    ...
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+@section Scripts {
+    <script>
+
+        function ChangePassword(userId) {
+            $.ajax({
+                type: "GET",
+                url: "/Admin/Users/ChangePassword/" + userId,
+                success: function (result) {
+                    $('#modal_body').html(result);
+                }
+            });
+            $('#exampleModalCenterTitle').text("ویرایش رمز عبور");
+            $('#exampleModalCenter').modal();
+        }
+
+    </script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,275 @@
+﻿@model IEnumerable<ZibalPay.Data.Entities.Users.User>
+
+@{
+    ViewData["Title"] = "مدیریت کاربران";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    int i = 1;
+    bool test = (bool)ViewData["NotNull"];
+}
+
+<h1>مدیریت کاربران</h1>
+
+
+@if (!test)
+{
+    <p>
+        <a class="btn btn-success float-right m-2" asp-action="Create">افزودن کاربر جدید</a>
+        <a class="btn btn-danger float-right m-2" asp-action="Index" asp-route-id="true">کاربران حذف شده</a>
+    </p>
+}
+else
+{
+    <p>
+        <a class="btn btn-info float-right m-2" asp-action="Index" asp-route-id="false">بازگشت</a>
+    </p>
+}
+
+<table class="table table-bordered bg-white table-striped">
+    <thead>
+        <tr>
+            <th>
+                ردیف
+            </th>
+            <th>
+                نام کاربر
+            </th>
+            <th>
+                نقش ها
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserPhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserEmail)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (!Model.Any())
+        {
+            <tr>
+                <td colspan="6" class="text-danger text-center">موردی برای نمایش وجود ندارد</td>
+            </tr>
+        }
+        @foreach (var item in Model)
+        {
+            <tr class="@((!item.IsActive)?"bg-secondary text-white":"")">
+                <td>
+                    @(i++)
+                </td>
+                <td>
+                    @{
+                        // True is female
+                        if (item.UserGender)
+                        {
+                            <span>خانم </span>
+                        }
+                        else
+                        {
+                            <span>آقای </span>
+                        }
+                        <span>@item.UserFirstName @item.UserLastName</span>
+
+
+                    }
+
+                </td>
+                <td>
+                    <ul>
+                        @foreach (var role in item.UserSelectedRoles)
+                        {
+                            <li>@role.Role.RoleTitle</li>
+                        }
+                    </ul>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserPhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserEmail)
+                </td>
+                <td>
+                    <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.UserId">ویرایش</a> |
+                    <a class="btn btn-info" asp-action="Details" asp-route-id="@item.UserId">جزئیات</a> |
+                    @if (!item.IsDelete)
+                    {
+                        <button class="btn btn-danger" onclick="Delete(@item.UserId,'حذف')">حذف</button> <span>|</span>
+                        @if (item.IsActive)
+                        {
+                            <button class="btn btn-secondary" onclick="Deactivate(@item.UserId,'غیرفعال کردن')">غیرفعال کردن</button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-success" onclick="Deactivate(@item.UserId,'فعال کردن')">فعال کردن</button>
+
+                        }
+                    }
+                    else
+                    {
+                        <button class="btn btn-danger" onclick="Delete(@item.UserId,'بازگردانی')">بازگردانی</button> <span>|</span>
+                    }
+
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+@section Scripts{
+    <script>
+        function Delete(userId, txt) {
+            swal({
+                title: "آیا از " + txt + " این کاربر اطمینان دارید؟",
+                text: "",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "بله مطمئنم!",
+                closeOnConfirm: false
+            },
+                function () {
+                    $.ajax({
+                        url: '/Admin/Users/Delete/' + userId,
+                        type: 'POST',
+                        data: {
+                            id: userId
+                        },
+                        success: function (result) {
+                            swal({
+                                title: "کاربر با موفقیت " + txt + " شد",
+                                text: "",
+                                type: "success"
+                            },
+                                function () {
+                                    location.reload();
+                                });
+                        },
+                        error: function () {
+                            swal({
+                                title: "خطایی رخ داد",
+                                text: "",
+                                icon: "error"
+                            });
+                        }
+                    });
+                });
+        }
+
+        function Deactivate(userId, txt) {
+            swal({
+                title: "آیا از " + txt + " این کاربر اطمینان دارید؟",
+                text: "",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "بله مطمئنم!",
+                closeOnConfirm: false
+            },
+                function () {
+                    $.ajax({
+                        url: '/Admin/Users/Deactivate/' + userId,
+                        type: 'POST',
+                        data: {
+                            id: userId
+                        },
+                        success: function (result) {
+                            swal({
+                                title: "کاربر با موفقیت " + txt + " انجام شد",
+                                text: "",
+                                type: "success"
+                            },
+                                function () {
+                                    location.reload();
+                                });
+                        },
+                        error: function () {
+                            swal({
+                                title: "خطایی رخ داد",
+                                text: "",
+                                icon: "error"
+                            });
+                        }
+                    });
+                });
+        }
+
+
+        function AddAgeCategory(desId, agId) {
+            $("#ageId").val(ageId);
+            var form = $('#formAgeCategory');
+            var token = $('input[name="__RequestVerificationToken"]', form).val();
+
+            $.ajax({
+                url: '/Admin/Destinations/GetAllAgeCategories',
+                type: 'POST',
+                data: {
+                    __RequestVerificationToken: token,
+                    destinationId: desId,
+                    ageId: agId
+                },
+                success: function (result) {
+                    $('#exampleModalCenter').modal('toggle');
+                    swal({
+                        title: "گروه سنی با موفقیت افزوده شد",
+                        text: "",
+                        type: "success"
+                    },
+                        function () {
+                            $.get("/Admin/Destinations/AgeCategoryComponent/" + desId, function (data) { $("#iAgeCategory").html(data); });
+                        });
+                },
+                error: function () {
+                    swal({
+                        title: "خطایی رخ داد",
+                        text: "",
+                        icon: "error"
+                    });
+                }
+            });
+        }
+
+        function DeleteAgeCategory(desId, agId) {
+            swal({
+                title: "آیا از حذف این رده سنی اطمینان دارید",
+                text: "",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "بله مطمئنم!",
+                closeOnConfirm: false
+            },
+                function () {
+                    $.ajax({
+                        url: '/Admin/Destinations/ConfirmDeleteAgeCategory',
+                        type: 'POST',
+                        data: {
+                            destinationId: desId,
+                            ageId: agId
+                        },
+                        success: function (result) {
+                            swal({
+                                title: "گروه سنی با موفقیت حذف شد",
+                                text: "",
+                                type: "success"
+                            },
+                                function () {
+                                    $.get("/Admin/Destinations/AgeCategoryComponent/" + desId, function (data) { $("#iAgeCategory").html(data); });
+
+                                });
+                        },
+                        error: function () {
+                            swal({
+                                title: "خطایی رخ داد",
+                                text: "",
+                                icon: "error"
+                            });
+                        }
+                    });
+                });
+        }
+    </script>
+
+}

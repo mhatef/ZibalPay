@@ -1,0 +1,25 @@
+﻿@model ZibalPay.Core.DTOs.Customer.CustomerInfo
+@{
+    Layout = "_DefaultLayout";
+}
+
+
+
+
+
+<div class="ckeckout">
+    <div class="container">
+        <div class="contact-top">
+            <h1>@Model.CustomerName عزیز خوش آمدید</h1>
+            <p>در این قسمت میتوانید سبد خرید خود را مشاهده کنید</p>
+        </div>
+        <div class="ckeckout-top">
+            <div class=" cart-items heading">
+                <h1>سبد خرید شما</h1>
+                
+                @await Component.InvokeAsync("GetCartComponent")
+
+            </div>
+        </div>
+    </div>
+</div>

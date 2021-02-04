@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZibalPay.Web", "ZibalPay.All\ZibalPay.Web.csproj", "{6F7E75C4-D950-41BD-AE08-F0D40BA1529A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZibalPay.Data", "ZibalPay.Data\ZibalPay.Data.csproj", "{442CD3EF-9D30-40C0-9092-D2644BB75BAA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZibalPay.Core", "ZibalPay.Core\ZibalPay.Core.csproj", "{F00FBEBF-2C67-40A8-805F-7D32D9687306}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6F7E75C4-D950-41BD-AE08-F0D40BA1529A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F7E75C4-D950-41BD-AE08-F0D40BA1529A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F7E75C4-D950-41BD-AE08-F0D40BA1529A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F7E75C4-D950-41BD-AE08-F0D40BA1529A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{442CD3EF-9D30-40C0-9092-D2644BB75BAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{442CD3EF-9D30-40C0-9092-D2644BB75BAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{442CD3EF-9D30-40C0-9092-D2644BB75BAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{442CD3EF-9D30-40C0-9092-D2644BB75BAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F00FBEBF-2C67-40A8-805F-7D32D9687306}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F00FBEBF-2C67-40A8-805F-7D32D9687306}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F00FBEBF-2C67-40A8-805F-7D32D9687306}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F00FBEBF-2C67-40A8-805F-7D32D9687306}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FDD61942-7D28-4396-B96D-67CAC6615271}
+	EndGlobalSection
+EndGlobal

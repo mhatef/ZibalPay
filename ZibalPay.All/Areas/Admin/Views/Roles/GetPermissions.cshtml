@@ -1,0 +1,37 @@
+﻿@model List<ZibalPay.Data.Entities.Users.Permission>
+@{
+    Layout = null;
+    List<int> selected = ViewData["selected"] as List<int>;
+}
+
+<form asp-action="GetPermissions">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="form-group">
+        <ul>
+            @foreach (var item in Model.Where(p => p.ParentID == null))
+            {
+                <li>
+                    <label class="control-label">@item.PermissionTitle</label>
+                    <input @((selected!.Any(i=>i==item.PermissionId))?"checked":"") type="checkbox" value="@item.PermissionId" name="selectedPermissions" />
+                    @if (Model.Any(p => p.ParentID == item.ParentID))
+                    {
+                        <ul>
+                            @foreach (var sub in Model.Where(p => p.ParentID == item.PermissionId))
+                            {
+                                <li>
+                                    <label class="control-label">@sub.PermissionTitle</label>
+                                    <input @((selected!.Any(i=>i==sub.PermissionId))?"checked":"") type="checkbox" value="@sub.PermissionId" name="selectedPermissions" />
+                                </li>
+                            }
+                        </ul>
+                    }
+                </li>
+            }
+        </ul>
+
+    </div>
+    <div class="form-group">
+        <input type="submit" value="تائید" class="btn btn-success btn-block" />
+    </div>
+</form>

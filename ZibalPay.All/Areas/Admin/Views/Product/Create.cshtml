@@ -1,0 +1,66 @@
+﻿@model ZibalPay.Data.Entities.Products.Product
+
+@{
+    ViewData["Title"] = "ایجاد محصول جدید";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<h4>ایجاد محصول جدید</h4>
+<hr />
+
+<form asp-action="Create"  enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="ProductTitle" class="control-label"></label>
+                <input asp-for="ProductTitle" class="form-control" />
+                <span asp-validation-for="ProductTitle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProductDescription" class="control-label"></label>
+                <textarea rows="3" asp-for="ProductDescription" class="form-control" ></textarea>
+                <span asp-validation-for="ProductDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProductPrice" class="control-label"></label>
+                <input asp-for="ProductPrice" class="form-control" placeholder="به ریال وارد کنید"/>
+                <span asp-validation-for="ProductPrice" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <img id="productImg" src="/Images/Product/BlogNoImage.png" class="img-thumbnail" style="max-width: 250px"/>
+            <label class="control-label">انتخاب تصویر محصول</label>
+            <input type="file" id="productImage" name="productImage"/>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="ثبت محصول" class="btn btn-success btn-block" />
+    </div>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+    <script type="text/javascript">
+        function readURL1(input) {
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#productImg').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#productImage").change(function () {
+            readURL1(this);
+        });
+
+    </script>
+}

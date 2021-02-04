@@ -1,0 +1,56 @@
+﻿@model IEnumerable<ZibalPay.Data.Entities.Products.Product>
+
+@{
+    ViewData["Title"] = "محصولات";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>محصولات</h1>
+
+<p>
+    <a class="btn btn-success float-right m-2" asp-action="Create">ایجاد محصول جدید</a>
+</p>
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductImage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            <img src="/Images/Product/@item.ProductImage" class="img-thumbnail" style="max-width: 150px"/>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductTitle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductPrice)
+            ریال
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreateDate)
+        </td>
+    </tr>
+}
+    </tbody>
+</table>

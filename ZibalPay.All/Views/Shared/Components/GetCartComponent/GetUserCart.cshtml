@@ -1,0 +1,57 @@
+﻿@model ZibalPay.Data.Entities.Products.Order
+
+
+
+<div class="in-check">
+    <ul class="unit">
+        <li>
+            <span>
+                مورد
+            </span>
+        </li>
+        <li>
+            <span>
+                نام محصول
+            </span>
+        </li>
+        <li>
+            <span>
+                قیمت واحد
+            </span>
+        </li>
+
+
+        <div class="clearfix"> </div>
+    </ul>
+    @if (Model != null)
+    {
+        foreach (var item in Model.OrderDetails)
+        {
+            <ul class="cart-header simpleCart_shelfItem">
+
+                <li class="ring-in">
+                    <a href="#"><img src="/Images/Product/@item.Product.ProductImage" class="img-responsive" alt=""></a>
+                </li>
+                <li>
+                    <span>
+                        @item.Product.ProductTitle
+                    </span>
+                </li>
+                <li><span class="item_price">ریال @item.Price</span></li>
+
+                <div class="clearfix"> </div>
+            </ul>
+
+        }
+        
+        <hr />
+        <p>شماره فاکتور: @Model.OrderId</p>
+        <p>جمع کل مبلغ: @Model.OrderSum ریال</p>
+        <a href="/User/Home/Payment/@Model.OrderId" class="btn btn-success float-right">پرداخت</a>
+    }
+    else
+    {
+        <p>سبد خرید شما خالی است</p>
+    }
+
+</div>

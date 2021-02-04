@@ -1,0 +1,26 @@
+﻿@model ZibalPay.Core.DTOs.Customer.verifyResponse
+@{
+    
+    Layout = "_DefaultLayout";
+}
+
+<div class="login">
+    <div class="container">
+        <div class="login-main">
+
+            
+            @if (ViewData["success"] != null)
+            {
+                <div class="alert alert-success">پرداخت با موفقیت انجام شد</div>
+                <p>شماره فاکتور: @Model.paidAt</p>
+            }
+            else
+            {
+                <div class="alert alert-danger">
+                    <p>عملیات پرداخت انجام نشد</p>
+                </div>
+            }
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+</div>

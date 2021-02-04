@@ -1,0 +1,67 @@
+﻿@{
+    Layout = "_DefaultLayout";
+}
+
+<!--banner strat here-->
+<!--فارسی شده توسط مرجع تخصصی برنامه نویسان-->
+<div class="banner">
+    <div class="container">
+        <div class="banner-main">
+            <div class="col-md-6 banner-right">
+                <a href="/"><img src="/Assets/images/ba.png" alt="" class="img-responsive"></a>
+            </div>
+            <div class="col-md-6 banner-left simpleCart_shelfItem">
+                <span class="bann-heart"> </span>
+                <h2>
+                    کیف های دستی
+                </h2>
+                <h1>لورم ایپسوم متن ساختگی </h1>
+                <h5 class="item_price">$200.00</h5>
+                <ul class="bann-small-img">
+                    <li><a href="/"><img src="/Assets/images/b1.jpg"></a></li>
+                    <li><a href="/"><img src="/Assets/images/b2.jpg"></a></li>
+                </ul>
+                <h6>
+                    اندازه نمودارها
+                </h6>
+                <ul class="bann-btns">
+                    <li>
+                        <select class="bann-size">
+                            <option value="select your location">
+                                اندازه
+                            </option>
+                            <option value="saab">
+                                کوچک
+                            </option>
+                            <option value="fiat">
+                                متوسط
+                            </option>
+                            <option value="audi">
+                                بزرگ
+                            </option>
+                        </select>
+                    </li>
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+</div>
+<!--banner end here-->
+@await Component.InvokeAsync("GetProductComponent")
+<!--block-layer2 start here-->
+<div class="blc-layer2">
+    <div class="container">
+        <div class="blc-layer2-main">
+            <div class="col-md-6 blc-layer2-right">
+                <h3>لورم ایپسوم متن ساختگی با تولید سادگی</h3>
+                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد</p>
+            </div>
+            <div class="col-md-6 blc-layer2-left">
+
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+</div>
+<!--block-layer2 end here-->

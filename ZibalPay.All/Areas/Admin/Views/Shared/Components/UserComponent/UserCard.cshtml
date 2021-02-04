@@ -1,0 +1,28 @@
+﻿@model string
+
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <img src="/AdminStyle/assets/images/users/2.jpg" alt="user" class="rounded-circle" width="40">
+        <span class="m-l-5 font-medium d-none d-sm-inline-block">@Model<i class="mdi mdi-chevron-down"></i></span>
+    </a>
+    <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
+        <span class="with-arrow">
+            <span class="bg-primary"></span>
+        </span>
+        <div class="d-flex no-block align-items-center p-15 bg-primary text-white m-b-10">
+            <div class="">
+                <img src="/AdminStyle/assets/images/users/2.jpg" alt="user" class="rounded-circle" width="60">
+            </div>
+            <div class="m-l-10">
+                <h4 class="m-b-0">@Model</h4>
+            </div>
+        </div>
+        <div class="profile-dis scrollable ps-container ps-theme-default" data-ps-id="66329548-5196-1bfe-94c2-d46381a6883b">
+            <a class="dropdown-item" href="/Logout">
+                <i class="fa fa-power-off m-r-5 m-l-5"></i> خروج
+            </a>
+            <div class="dropdown-divider"></div>
+            <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 0px;"><div class="ps-scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps-scrollbar-y-rail" style="top: 0px; right: -9px;"><div class="ps-scrollbar-y" tabindex="0" style="top: 0px; height: 0px;"></div></div>
+        </div>
+    </div>
+</li>

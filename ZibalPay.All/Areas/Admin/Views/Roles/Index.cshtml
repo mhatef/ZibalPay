@@ -1,0 +1,108 @@
+﻿@model IEnumerable<ZibalPay.Data.Entities.Users.Role>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>مدیریت نقش ها</h2>
+
+<p>
+    <button class="btn btn-success float-right m-2" onclick="Create()">ثبت نقش جدید</button>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.RoleTitle)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RoleTitle)
+                </td>
+                <td>
+                    <button class="btn btn-info" onclick="PermissionList(@item.RoleId)">دسترسی ها</button> |
+                    <button class="btn btn-warning" onclick="Edit(@item.RoleId)">ویرایش</button> 
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+@section Modal
+{
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="modal_body">
+                    ...
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+@section Scripts
+{
+    <script>
+        function Create() {
+            $.ajax({
+                type: "GET",
+                url: "/Admin/Roles/Create",
+                success: function (result) {
+                    $('#modal_body').html(result);
+                }
+            });
+            $('#exampleModalCenterTitle').text("ثبت نقش جدید");
+            $('#exampleModalCenter').modal();
+        }
+
+        function Edit(id) {
+            $.ajax({
+                type: "GET",
+                url: "/Admin/Roles/Edit/" + id,
+                success: function (result) {
+                    $('#modal_body').html(result);
+                }
+            });
+            $('#exampleModalCenterTitle').text("ویرایش عنوان نقش");
+            $('#exampleModalCenter').modal();
+        }
+
+        function PermissionList(roleId) {
+            $.ajax({
+                type: "GET",
+                url: "/Admin/Roles/GetPermissions/"+roleId,
+                success: function (result) {
+                    $('#modal_body').html(result);
+                }
+            });
+            $('#exampleModalCenterTitle').text("دسترسی ها");
+            $('#exampleModalCenter').modal();
+        }
+
+
+        function Delete(id) {
+            swal({
+                title: "متاسفانه این بخش هنوز آماده نشده است",
+                text: "",
+                type: "error"
+            });
+        }
+    </script>
+}
