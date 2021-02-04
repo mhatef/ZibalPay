@@ -5,11 +5,12 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using ZibalPay.Core.Security;
 
 namespace ZibalPay.All.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize]
+    [PermissionChecker(0)] 
     public class HomeController : Controller
     {
         public IActionResult Index()

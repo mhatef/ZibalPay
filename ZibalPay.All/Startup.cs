@@ -35,17 +35,19 @@ namespace ZibalPay.All
 
             services.AddAuthentication(options =>
             {
+                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
 
             }).AddCookie(options =>
             {
-                options.LoginPath = "/Login";
+                options.LoginPath = "/UserLogin";
                 options.LogoutPath = "/Logout";
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(4320);
 
             });
+
 
             #endregion
 

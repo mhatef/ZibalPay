@@ -21,11 +21,20 @@ namespace ZibalPay.Core.Security
         {
             _permissionService =
                 (IPermissionService)context.HttpContext.RequestServices.GetService(typeof(IPermissionService));
+
+            string phoneNumber = context.HttpContext.User.Identity.Name;
+
+            if (_permissionId==0)
+            {
+                if (!_permissionService.AnyPermission(_permissionId, phoneNumber))
+                {
+                    context.Result = new RedirectResult("/Login?" + context.HttpContext.Request.Path);
+                }
+            }
             if (context.HttpContext.User.Identity.IsAuthenticated)
             {
-                string phoneNumber = context.HttpContext.User.Identity.Name;
-
-                if (!_permissionService.CheckPermission(_permissionId, phoneNumber))
+                
+                if (!_permissionService.CheckPermission(_permissionId, phoneNumber) )
                 {
                     context.Result = new RedirectResult("/Login?" + context.HttpContext.Request.Path);
                 }

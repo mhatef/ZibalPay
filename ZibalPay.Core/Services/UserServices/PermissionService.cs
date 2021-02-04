@@ -82,6 +82,15 @@ namespace ZibalPay.Core.Services.UserServices
             return RolesPermission.Any(p => UserRoles.Contains(p));
         }
 
+        public bool AnyPermission(int permissionId, string userPhoneNumber)
+        {
+            int userId = _context.Users.Single(u => u.UserPhoneNumber == userPhoneNumber).UserId;
+
+            return _context.UserSelectedRoles
+                .Any(r => r.UserId == userId);
+
+        }
+
         public void Dispose()
         {
             _context.DisposeAsync();

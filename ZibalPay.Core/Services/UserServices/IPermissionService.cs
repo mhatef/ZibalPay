@@ -12,5 +12,6 @@ namespace ZibalPay.Core.Services.UserServices
         Task<List<int>> PermissionsRole(int roleId);
         Task<bool> UpdatePermissionsRole(int roleId, List<int> permissions);
         bool CheckPermission(int permissionId, string userPhoneNumber);
+        bool AnyPermission(int permissionId, string userPhoneNumber);
     }
 }

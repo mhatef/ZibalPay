@@ -70,8 +70,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 </div>
                 <div class="header-left">
                     <div class="search">
-                        @if (User.Identity.IsAuthenticated)
-                        {
+                        
                             <div class="cart box_1">
                                 <a href="/User">
                                     <h3>
@@ -84,7 +83,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                     </a>
                                 </p>
                             </div>
-                        }
+                        
                         <div class="head-signin">
                             <h5>
                                 @if (!User.Identity.IsAuthenticated)
@@ -163,7 +162,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <div class="col-md-3 footer-grid">
                         <ul>
                             <li>
-                                <a href="/Login">
+                                <a href="/Admin">
                                    بخش مدیریت
                                 </a>
                             </li>
